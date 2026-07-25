@@ -203,3 +203,12 @@ document.getElementById("resetDataBtn").onclick=()=>{if(confirm("Bạn chắc ch
 
 window.addEventListener("resize",()=>setTimeout(renderCharts,100));
 renderAll();
+
+// PWA Mobile 4.1
+let deferredInstallPrompt=null;
+const installBtn=document.getElementById('installAppBtn');
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;if(installBtn)installBtn.hidden=false;});
+if(installBtn){installBtn.addEventListener('click',async()=>{if(!deferredInstallPrompt){toast('Mở menu Chrome ⋮ và chọn “Cài đặt ứng dụng” hoặc “Thêm vào màn hình chính”.');return;}
+deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;installBtn.hidden=true;});}
+window.addEventListener('appinstalled',()=>{toast('Đã cài PHỐ HANDMADE AI OS lên điện thoại');if(installBtn)installBtn.hidden=true;});
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));}

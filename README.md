@@ -1,4 +1,4 @@
-# PHỐ HANDMADE AI OS 4.0
+# PHỐ HANDMADE AI OS 4.1 MOBILE
 
 Hệ thống quản lý tĩnh, tối ưu cho điện thoại và có thể chạy miễn phí trên Netlify.
 
@@ -48,3 +48,10 @@ Khóa API chỉ nằm trên máy chủ Netlify, không xuất hiện trong mã t
 ## Lưu ý dữ liệu
 
 Dữ liệu hiện lưu trên từng trình duyệt/điện thoại. Hãy bấm **Sao lưu** định kỳ để tải file JSON. Khi đổi thiết bị, vào mục Báo cáo và chọn file sao lưu để khôi phục.
+
+## Cài trên điện thoại Android
+1. Đưa phiên bản này lên GitHub và Netlify.
+2. Mở website Netlify bằng Chrome trên điện thoại.
+3. Nhấn nút **Cài ứng dụng** hoặc menu **⋮ → Cài đặt ứng dụng / Thêm vào màn hình chính**.
+4. Chọn **Cài đặt**.
+5. Ứng dụng sẽ xuất hiện trên màn hình chính và mở toàn màn hình.
