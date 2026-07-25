@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#153f2e" />
+  <title>PHỐ HANDMADE AI OS 4.0</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">PHỐ</div>
+        <div>
+          <strong>HANDMADE</strong>
+          <small>AI OS 4.0</small>
+        </div>
+      </div>
+
+      <nav id="nav">
+        <button class="nav-item active" data-view="dashboard">🏠 Tổng quan</button>
+        <button class="nav-item" data-view="calendar">📅 Lịch nội dung</button>
+        <button class="nav-item" data-view="content">✨ AI Content Studio</button>
+        <button class="nav-item" data-view="kpi">📊 KPI Center</button>
+        <button class="nav-item" data-view="library">🗂️ Thư viện</button>
+        <button class="nav-item" data-view="reports">📄 Báo cáo</button>
+        <button class="nav-item" data-view="settings">⚙️ Cài đặt</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sync-badge"><span></span> Dữ liệu lưu trên thiết bị</div>
+        <small>Không phát sinh phí khi chưa bật AI.</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-only" id="menuBtn">☰</button>
+        <div>
+          <h1 id="pageTitle">Trung tâm điều hành</h1>
+          <p id="todayText"></p>
+        </div>
+        <div class="top-actions">
+          <button class="secondary" id="quickAddBtn">＋ Thêm nội dung</button>
+          <button class="primary" id="exportBtn">Sao lưu</button>
+        </div>
+      </header>
+
+      <section id="view-dashboard" class="view active">
+        <div class="hero">
+          <div>
+            <span class="eyebrow">PHỐ HANDMADE AI OS 4.0</span>
+            <h2>Điều hành toàn bộ hệ sinh thái từ một nơi</h2>
+            <p>Group · Fanpage · Mạnh Điệp · TikTok · YouTube</p>
+          </div>
+          <div class="hero-score">
+            <span>Tiến độ tuần</span>
+            <strong id="weeklyProgressHero">0%</strong>
+          </div>
+        </div>
+
+        <div class="stats-grid" id="statsGrid"></div>
+
+        <div class="two-col">
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <h3>Việc cần làm hôm nay</h3>
+                <p>Ưu tiên các nội dung có thời hạn gần nhất.</p>
+              </div>
+              <button class="text-btn" data-go="calendar">Mở lịch →</button>
+            </div>
+            <div id="todayTasks" class="task-list"></div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <h3>Hiệu suất 7 ngày</h3>
+                <p>Số nội dung đã hoàn thành theo ngày.</p>
+              </div>
+            </div>
+            <canvas id="weeklyChart" height="220"></canvas>
+          </article>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <h3>Phân vai hệ sinh thái</h3>
+                <p>Giữ nội dung khác biệt giữa từng kênh.</p>
+              </div>
+            </div>
+            <div class="channel-roles">
+              <div><b>Group</b><span>Cộng đồng, hỏi đáp, mini game</span></div>
+              <div><b>Fanpage</b><span>Reels, nội dung truyền thông</span></div>
+              <div><b>Mạnh Điệp</b><span>Câu chuyện, hậu trường, niềm tin</span></div>
+              <div><b>TikTok/YouTube</b><span>Video khám phá và hướng dẫn</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <h3>Gợi ý chuyên gia</h3>
+                <p>Được tạo từ dữ liệu đã nhập.</p>
+              </div>
+              <button class="text-btn" id="refreshAdvice">Làm mới</button>
+            </div>
+            <div id="expertAdvice" class="advice-box"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-calendar" class="view">
+        <div class="section-toolbar">
+          <div>
+            <h2>Lịch nội dung</h2>
+            <p>Lập kế hoạch, lọc theo kênh và đánh dấu hoàn thành.</p>
+          </div>
+          <div class="toolbar-actions">
+            <select id="calendarChannelFilter">
+              <option value="all">Tất cả kênh</option>
+              <option>Group</option><option>Fanpage</option><option>Mạnh Điệp</option>
+              <option>TikTok</option><option>YouTube</option>
+            </select>
+            <button class="primary" id="addContentBtn">＋ Tạo lịch</button>
+          </div>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </section>
+
+      <section id="view-content" class="view">
+        <div class="section-toolbar">
+          <div>
+            <h2>AI Content Studio</h2>
+            <p>Tạo bài viết, tiêu đề, hashtag và lời kêu gọi hành động.</p>
+          </div>
+          <span class="cost-pill">AI chỉ tính phí khi bấm “Tạo bằng AI”</span>
+        </div>
+        <div class="studio-grid">
+          <article class="card">
+            <div class="form-grid">
+              <label>Chủ đề
+                <input id="aiTopic" placeholder="Ví dụ: câu chuyện nghệ nhân làm đèn gỗ" />
+              </label>
+              <label>Kênh
+                <select id="aiChannel"><option>Fanpage</option><option>Group</option><option>Mạnh Điệp</option><option>TikTok</option><option>YouTube</option></select>
+              </label>
+              <label>Mục tiêu
+                <select id="aiGoal"><option>Tăng tương tác</option><option>Kéo thành viên về Group</option><option>Xây dựng niềm tin</option><option>Giới thiệu sản phẩm</option><option>Giáo dục cộng đồng</option></select>
+              </label>
+              <label>Giọng văn
+                <select id="aiTone"><option>Gần gũi, nhân văn</option><option>Chuyên nghiệp</option><option>Hài hước</option><option>Truyền cảm hứng</option><option>Ngắn gọn, mạnh mẽ</option></select>
+              </label>
+              <label class="full">Yêu cầu thêm
+                <textarea id="aiExtra" rows="4" placeholder="Ví dụ: tiêu đề chữ đậm, 5 hashtag có #PhoHandmade"></textarea>
+              </label>
+            </div>
+            <div class="form-actions">
+              <button class="secondary" id="templateGenerateBtn">Tạo bản miễn phí</button>
+              <button class="primary" id="aiGenerateBtn">✨ Tạo bằng AI</button>
+            </div>
+            <small class="helper">Bản miễn phí sử dụng mẫu dựng sẵn và không gọi API.</small>
+          </article>
+
+          <article class="card output-card">
+            <div class="card-head">
+              <h3>Nội dung đề xuất</h3>
+              <div>
+                <button class="text-btn" id="copyOutputBtn">Sao chép</button>
+                <button class="text-btn" id="saveOutputBtn">Lưu thư viện</button>
+              </div>
+            </div>
+            <textarea id="aiOutput" rows="20" placeholder="Nội dung sẽ xuất hiện tại đây..."></textarea>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-kpi" class="view">
+        <div class="section-toolbar">
+          <div>
+            <h2>KPI Center</h2>
+            <p>Nhập số liệu định kỳ để hệ thống tự so sánh và gợi ý điều chỉnh.</p>
+          </div>
+          <button class="primary" id="addKpiBtn">＋ Nhập KPI</button>
+        </div>
+        <div class="stats-grid" id="kpiSummary"></div>
+        <div class="two-col">
+          <article class="card">
+            <h3>Tăng trưởng người theo dõi/thành viên</h3>
+            <canvas id="growthChart" height="260"></canvas>
+          </article>
+          <article class="card">
+            <h3>Tương tác theo kênh</h3>
+            <canvas id="engagementChart" height="260"></canvas>
+          </article>
+        </div>
+        <article class="card">
+          <div class="card-head">
+            <h3>Lịch sử dữ liệu</h3>
+            <button class="text-btn" id="downloadKpiCsv">Tải CSV</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Ngày</th><th>Kênh</th><th>Follower/TV</th><th>Tiếp cận</th><th>Tương tác</th><th>Bài đăng</th><th></th></tr></thead>
+              <tbody id="kpiTableBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section id="view-library" class="view">
+        <div class="section-toolbar">
+          <div><h2>Thư viện nội dung</h2><p>Lưu bài viết, prompt, ý tưởng, link ảnh và video.</p></div>
+          <button class="primary" id="addLibraryBtn">＋ Thêm tài nguyên</button>
+        </div>
+        <div id="libraryGrid" class="library-grid"></div>
+      </section>
+
+      <section id="view-reports" class="view">
+        <div class="section-toolbar">
+          <div><h2>Trung tâm báo cáo</h2><p>Tạo bản tổng kết để lưu trữ hoặc gửi đội ngũ.</p></div>
+        </div>
+        <div class="report-grid">
+          <article class="card report-card">
+            <span>HÀNG TUẦN</span><h3>Báo cáo vận hành</h3><p>Tiến độ nội dung, KPI và đề xuất tuần tới.</p>
+            <button class="primary" id="printReportBtn">Tạo báo cáo PDF</button>
+          </article>
+          <article class="card report-card">
+            <span>DỮ LIỆU</span><h3>Sao lưu toàn bộ</h3><p>Tải file JSON để khôi phục khi đổi điện thoại.</p>
+            <button class="secondary" id="backupBtn">Tải bản sao lưu</button>
+          </article>
+          <article class="card report-card">
+            <span>KHÔI PHỤC</span><h3>Nhập dữ liệu</h3><p>Khôi phục lịch, KPI và thư viện từ file JSON.</p>
+            <label class="file-button">Chọn file<input type="file" id="restoreInput" accept=".json" hidden /></label>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-settings" class="view">
+        <div class="section-toolbar"><div><h2>Cài đặt</h2><p>Cá nhân hóa hệ thống và kết nối AI tùy chọn.</p></div></div>
+        <div class="settings-grid">
+          <article class="card">
+            <h3>Thông tin thương hiệu</h3>
+            <label>Tên hệ sinh thái<input id="settingBrand" value="Phố Handmade" /></label>
+            <label>Tên người quản trị<input id="settingOwner" value="Mạnh Điệp" /></label>
+            <label>Mục tiêu tháng<input id="settingMonthlyGoal" type="number" min="1" value="60" /></label>
+            <button class="primary" id="saveSettingsBtn">Lưu cài đặt</button>
+          </article>
+          <article class="card">
+            <h3>Kết nối AI an toàn</h3>
+            <p>Không nhập API Key trực tiếp vào trình duyệt. Hãy lưu khóa trong Netlify Environment Variables với tên <b>OPENAI_API_KEY</b>.</p>
+            <p>Model tùy chọn: <b>OPENAI_MODEL</b>. Hệ thống gọi Netlify Function để bảo vệ khóa.</p>
+            <div class="status-row"><span>Đường dẫn AI</span><code>/.netlify/functions/generate</code></div>
+          </article>
+          <article class="card danger">
+            <h3>Đặt lại dữ liệu</h3>
+            <p>Xóa dữ liệu đang lưu trên thiết bị và khôi phục dữ liệu mẫu.</p>
+            <button class="danger-btn" id="resetDataBtn">Đặt lại hệ thống</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="contentDialog">
+    <form method="dialog" id="contentForm">
+      <div class="dialog-head"><h3>Tạo lịch nội dung</h3><button value="cancel" class="icon-btn">✕</button></div>
+      <label>Tiêu đề<input id="contentTitle" required /></label>
+      <div class="form-grid two">
+        <label>Ngày<input id="contentDate" type="date" required /></label>
+        <label>Giờ<input id="contentTime" type="time" value="20:00" /></label>
+        <label>Kênh<select id="contentChannel"><option>Group</option><option>Fanpage</option><option>Mạnh Điệp</option><option>TikTok</option><option>YouTube</option></select></label>
+        <label>Định dạng<select id="contentType"><option>Bài viết</option><option>Reel</option><option>Story</option><option>Livestream</option><option>Mini game</option><option>Video dài</option></select></label>
+      </div>
+      <label>Ghi chú<textarea id="contentNote" rows="3"></textarea></label>
+      <div class="dialog-actions"><button value="cancel" class="secondary">Hủy</button><button value="default" class="primary" id="saveContentBtn">Lưu</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="kpiDialog">
+    <form method="dialog" id="kpiForm">
+      <div class="dialog-head"><h3>Nhập KPI</h3><button value="cancel" class="icon-btn">✕</button></div>
+      <div class="form-grid two">
+        <label>Ngày<input id="kpiDate" type="date" required /></label>
+        <label>Kênh<select id="kpiChannel"><option>Group</option><option>Fanpage</option><option>Mạnh Điệp</option><option>TikTok</option><option>YouTube</option></select></label>
+        <label>Follower/Thành viên<input id="kpiFollowers" type="number" min="0" required /></label>
+        <label>Tiếp cận<input id="kpiReach" type="number" min="0" value="0" /></label>
+        <label>Tương tác<input id="kpiEngagement" type="number" min="0" value="0" /></label>
+        <label>Số bài đăng<input id="kpiPosts" type="number" min="0" value="0" /></label>
+      </div>
+      <div class="dialog-actions"><button value="cancel" class="secondary">Hủy</button><button value="default" class="primary" id="saveKpiBtn">Lưu KPI</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="libraryDialog">
+    <form method="dialog" id="libraryForm">
+      <div class="dialog-head"><h3>Thêm tài nguyên</h3><button value="cancel" class="icon-btn">✕</button></div>
+      <label>Tiêu đề<input id="libraryTitle" required /></label>
+      <label>Loại<select id="libraryType"><option>Bài viết</option><option>Prompt</option><option>Ý tưởng</option><option>Ảnh</option><option>Video</option><option>Liên kết</option></select></label>
+      <label>Nội dung hoặc đường dẫn<textarea id="libraryContent" rows="6" required></textarea></label>
+      <div class="dialog-actions"><button value="cancel" class="secondary">Hủy</button><button value="default" class="primary" id="saveLibraryBtn">Lưu</button></div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
